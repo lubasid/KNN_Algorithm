@@ -17,7 +17,7 @@ The output from your program will display the following:
 •	number of misclassified test samples, and 
 •	total number of test samples 
 Sample output is as follows. Notice that, this sample output does not show the best value of K:
-
+```
 K = 4
 ...
 Desired Class: 9   Computed Class: 9
@@ -28,6 +28,7 @@ Desired Class: 9   Computed Class: 9
 Accuracy Rate:  86.0 %
 Number of misclassified test samples: 7
 Total number of test samples:  50
+```
 
 Remarks:
 •	Use Euclidean distance measure to compute distances.
