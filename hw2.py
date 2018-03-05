@@ -4,6 +4,12 @@
 # Date: 03-01-2018
 # Trace Location: \\trace\Class\CSC-535-635\001\Sidlinskaya\HW2
 
+#NOTE: Commands to run program:
+# For default K value of 4:         python hw2.py MNIST_train.csv MNIST_test.csv
+# For best K value:                 python hw2.py MNIST_train.csv MNIST_test.csv yes
+# For a custom K integer value:     python hw2.py MNIST_train.csv MNIST_test.csv k_integer
+
+
 import sys
 import csv
 import copy
@@ -15,7 +21,6 @@ def calc_euclidean(x, y):
     train_sample = x[1:] # Removes the first column label/class attribute
     test_sample = y[1:]  # Removes the first column label/class attribute
     distance = 0
-    # distance2 = 0
     # Using each value of both the training and testing sample, calculate the euclidean distance
     for i in (range(len(test_sample)-1)):
         distance += (pow((float(train_sample[i]) - float(test_sample[i])),2))
@@ -93,11 +98,24 @@ def main():
         train_file_name = sys.argv[1]                           # Accepts filename as cmd line argument.
         test_file_name = sys.argv[2]
         
+        if len(sys.argv)> 3:                                    # Cmd line arguments for a custom K value
+            if sys.argv[3] == ("yes"):                          # If third cmd is "yes" use best value for k.
+                k_value = 7
+            else:                                               # If cmd is passed is a integer. Use as K value.
+                try:
+                    k_value = int(sys.argv[3])
+                except ValueError:
+                    print("Input is not an integer.")
+                    print("Enter integer as third cmd line argument for custom K value.")
+                    print("Or type yes as third cmd line argument for best K value.")
+                    sys.exit()
+        else:
+            k_value = 4
+            
+            
         training_data = read_data(train_file_name)              # Reads csv file into list.
         testing_data = read_data(test_file_name)
-        # k_squareroot = int(math.sqrt([len(training_data)]))       # K square root value.
-        
-        k_value = 4                                             # K value for selecting number of neighbors.
+                                                                # K value for selecting number of neighbors.
         missed_samples = 0                                      # Counter for missclassified samples.
         print ("K = ", k_value)
 
