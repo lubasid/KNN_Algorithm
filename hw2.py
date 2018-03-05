@@ -4,7 +4,8 @@
 # Date: 03-01-2018
 # Trace Location: \\trace\Class\CSC-535-635\001\Sidlinskaya1\HW2
 
-#Note : Commands to run algorithm:
+# Note: Must use python 3.
+# Commands to run algorithm:
 # For default K value of 4:         python hw2.py MNIST_train.csv MNIST_test.csv
 # For best K value:                 python hw2.py MNIST_train.csv MNIST_test.csv yes
 # For a custom K integer value:     python hw2.py MNIST_train.csv MNIST_test.csv k_integer
