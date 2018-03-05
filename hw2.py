@@ -6,7 +6,6 @@
 
 import sys
 import csv
-import numpy as np
 import copy
 import math
 import operator
@@ -16,13 +15,14 @@ def calc_euclidean(x, y):
     train_sample = x[1:] # Removes the first column label/class attribute
     test_sample = y[1:]  # Removes the first column label/class attribute
     distance = 0
+    # distance2 = 0
     # Using each value of both the training and testing sample, calculate the euclidean distance
     for i in (range(len(test_sample)-1)):
-        distance += (np.sum((float(train_sample[i]) - float(test_sample[i]))**2))
-    final_dist = np.sqrt(distance)
+        distance += (pow((float(train_sample[i]) - float(test_sample[i])),2))
+    final_dist = math.sqrt(distance)
     return (final_dist)
 
-def getDistance(item): # Returns values in index "1".
+def get_distance(item): # Returns values in index "1".
     return item[1]
 
 def calculate_knn(T, t, K):
@@ -36,7 +36,7 @@ def calculate_knn(T, t, K):
         if (len(neighbor_set)) < K:                 # If neighbor set less than K value.
             tup = [train_row, train_row_dist]      
             neighbor_set.append(tup)                # Add tuples of training data row, distance to neighbor set.
-            neighbor_set = sorted(neighbor_set, key = getDistance, reverse=True) # Sort list high to low, based on distance
+            neighbor_set = sorted(neighbor_set, key = get_distance, reverse=True) # Sort list high to low, based on distance
         else:                                       # When next training data row cannot be appended to neighbor set
             for element in neighbor_set:            # For each element in neighbor set.
                 element_index = neighbor_set.index(element) # Get index of that element in neighbor set.
@@ -45,7 +45,7 @@ def calculate_knn(T, t, K):
                     tup = [train_row, train_row_dist]       # Create a tuple of current training row and its distance.
                     neighbor_set.append(tup)                # Append this closer training data row to neighbor set.
 
-                    neighbor_set = sorted(neighbor_set, key = getDistance, reverse=True) # Sort list high to low
+                    neighbor_set = sorted(neighbor_set, key = get_distance, reverse=True) # Sort list high to low
                     break                                   # Jump out of loop as item in neighbor set has been replaced.
     return neighbor_set                                     # Return final set of neighbors for test sample
 
@@ -95,7 +95,7 @@ def main():
         
         training_data = read_data(train_file_name)              # Reads csv file into list.
         testing_data = read_data(test_file_name)
-        # k_squareroot = int(np.sqrt([len(training_data)]))       # K square root value.
+        # k_squareroot = int(math.sqrt([len(training_data)]))       # K square root value.
         
         k_value = 4                                             # K value for selecting number of neighbors.
         missed_samples = 0                                      # Counter for missclassified samples.
