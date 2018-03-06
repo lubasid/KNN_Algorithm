@@ -57,7 +57,6 @@ def calculate_knn(T, t, K):
 # Function to determine class of test samples.
 # Receives the neighbors (K) as an argument.
 def classify_class(neighbors):
-    inv_sums = []
     for k_item in neighbors:                            # For item in neighbors set
         k_item.append(1/k_item[1])                      # append its weighted vote.
     
@@ -128,6 +127,6 @@ def main():
 
     else:
         print ("Please enter the correct cmd line arguments in the format:")
-        print ("python hw2.py train_dataFile.csv test_dataFile.csv")
+        print ("python hw2.py MNIST_train.csv MNIST_test.csv")
 
 main()
